@@ -2,7 +2,7 @@ package ar.com.burucps.party
 
 class OrganizationCore extends Organization {
 	
-	Long uid;
+	String uid;
 	String name;
 	List <OrganizationRole> roles;
 
@@ -10,7 +10,7 @@ class OrganizationCore extends Organization {
     }
 	
 	@Override
-	public Long getUid() {
+	public String getUid() {
 		return uid;
 	}
 	
