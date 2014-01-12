@@ -1,6 +1,6 @@
 package ar.com.burucps.party
 
-abstract class PersonRole {
+abstract class PersonRole extends Person{
 	
 	PersonCore person;
 
@@ -8,7 +8,7 @@ abstract class PersonRole {
     }
 	
 	@Override
-	public Long getUid() {
+	public String getUid() {
 		return person.uid;
 	}
 

@@ -1,6 +1,6 @@
 package ar.com.burucps.party
 
-class PersonCore {
+class PersonCore extends Person {
 	
 	String firstName;
 	String middleNames;
