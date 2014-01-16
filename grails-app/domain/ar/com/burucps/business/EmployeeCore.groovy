@@ -1,7 +1,23 @@
 package ar.com.burucps.business
 
-class EmployeeCore {
+import java.util.List;
 
-    static constraints = {
-    }
+class EmployeeCore  extends Employee{
+	
+	String legajo;
+	List <EmployeeRole> roles;
+
+	static constraints = {
+	}
+	
+	@Override
+	public void addRole(String roleToAdd) {
+		// TODO Auto-generated method stub
+	}
+	
+	@Override
+	public Boolean hasRole(String roleToAdd) {
+		// TODO Auto-generated method stub
+		
+	}
 }

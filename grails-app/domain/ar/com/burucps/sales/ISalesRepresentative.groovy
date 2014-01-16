@@ -1,7 +1,9 @@
 package ar.com.burucps.sales
 
-class ISalesRepresentative {
+class ISalesRepresentative{
 
     static constraints = {
     }
+	
+	
 }
