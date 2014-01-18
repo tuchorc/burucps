@@ -1,10 +1,14 @@
 package ar.com.burucps.party
 
+import java.util.Map;
+
+import ar.com.burucps.business.EmployeeRole;
+
 class OrganizationCore extends Organization {
 	
 	String uid;
 	String name;
-	List <OrganizationRole> roles;
+	Map <String, OrganizationRole> roles;
 
     static constraints = {
     }
@@ -21,12 +25,14 @@ class OrganizationCore extends Organization {
 	
 	@Override
 	public void addRole(String roleToAdd) {
-		// TODO Auto-generated method stub
+		 OrganizationRoleTrader organizationSingle = OrganizationRoleTrader.getInstance();
+		 OrganizationRole newRole = organizationSingle.create(roleToAdd);
+		 newRole.organization = this;
+		 roles.put(roleToAdd, newRole);
 	}
 	
 	@Override
-	public Boolean hasRole(String roleToAdd) {
-		// TODO Auto-generated method stub
-		
+	public Boolean hasRole(String roleToLook) {
+		return roles.containsKey(roleToLook);
 	}
 }

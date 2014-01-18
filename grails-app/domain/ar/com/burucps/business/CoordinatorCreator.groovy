@@ -11,4 +11,6 @@ class CoordinatorCreator extends ProductCreator<Coordinator, String> {
 	@Override
 	public Coordinator create() {
 		return new Coordinator();
-	}}
+	}
+	
+}

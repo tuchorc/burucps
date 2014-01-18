@@ -11,4 +11,6 @@ class EmployeeCreator extends ProductCreator<Employee,String> {
 	@Override
 	public Employee create() {
 		return new EmployeeCore();
-	}}
+	}
+	
+	}

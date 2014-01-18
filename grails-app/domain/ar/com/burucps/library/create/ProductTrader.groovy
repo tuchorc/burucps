@@ -8,11 +8,23 @@ abstract class ProductTrader<Product,Specification> {
 	}
 
 	void addCreator(Specification specification, ProductCreator<Product, Specification> creator) {
-		creators.put(specification,creator);
+		if ( specification && creator )
+			creators.put(specification,creator);
+
+		/*Can not add creator without specification or creator*/
+		else throw new Exception( "Can't add Creator. Specification or creator is null." )
 	}
 
 	Product create(Specification specification) {
-		ProductCreator creator = creators.get(specification);
-		return creator.create();
+		ProductCreator creator;
+		Product newProduct;
+		creator = creators.get(specification);
+		if ( creator ) {
+			newProduct = creator.create();
+			return newProduct;
+		}
+		
+		/*Can not get creator, so can not create product*/
+		throw new Exception( "Can't create Product. Creator is null." )
 	}
 }
