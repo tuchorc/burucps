@@ -2,9 +2,9 @@ package ar.com.burucps.business
 
 import ar.com.burucps.business.Employee;
 
-class EmployeeRole extends Employee{
+class EmployeeRole extends Employee {
 
-	EmployeeCore employee;
+	static belongsTo = [employee:EmployeeCore];
 	
     static constraints = {
     }
@@ -20,4 +20,8 @@ class EmployeeRole extends Employee{
 		return employee.hasRole(roleToAdd);
 	}
 	
+	@Override
+	public String getSpecification() {
+		return employee.SPECIFICATION;
+	}
 }

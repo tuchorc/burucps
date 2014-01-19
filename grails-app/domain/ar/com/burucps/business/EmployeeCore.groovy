@@ -2,10 +2,12 @@ package ar.com.burucps.business
 
 import java.util.List;
 
-class EmployeeCore  extends Employee{
+class EmployeeCore  extends Employee {
+	
+	static final SPECIFICATION = "EMPLOYEE";
 	
 	String legajo;
-	Map <String, EmployeeRole> roles;
+	static hasMany = [roles:EmployeeRole];
 
 	static constraints = {
 	}
@@ -21,5 +23,10 @@ class EmployeeCore  extends Employee{
 	@Override
 	public Boolean hasRole(String roleToLook) {
 		return roles.containsKey(roleToLook);
+	}
+
+	@Override
+	public String getSpecification() {
+		return SPECIFICATION;
 	}
 }

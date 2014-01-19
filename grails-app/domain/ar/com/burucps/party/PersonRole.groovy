@@ -1,22 +1,16 @@
 package ar.com.burucps.party
 
-abstract class PersonRole extends Person{
+import ar.com.burucps.library.create.Specificable;
+
+abstract class PersonRole extends Person implements Specificable<String> {
 	
-	PersonCore person;
+	static belongsTo = [person:PersonCore];
 
     static constraints = {
     }
 	
-	@Override
-	public String getUid() {
-		return person.uid;
-	}
-
-	@Override
-	public String getName() {
-		return person.name;
-	}
-
+	abstract String getSpecification();
+	
 	@Override
 	public void addRole(String roleToAdd) {
 		person.addRole(roleToAdd);

@@ -8,20 +8,19 @@ class PersonCore extends Person {
 	String middleNames;
 	String surname;
 	Date birth;
-	Long id;
-	String uid;
-	Map <String, PersonCore> roles;
+	static hasMany = [roles:PersonRole];
+
+	def validateNotEmpty = {
+		if (!it) ['entryMissing']
+	}
 
 	static constraints = {
+		firstName (validator: validateNotEmpty(it))
+		surname (validator: validateNotEmpty(it))
+		birth (max : new Date())
 	}
 
-	@Override
-	public String getUid() {
-		return uid;
-	}
-
-	@Override
-	public String getName() {
+	public String getFullName() {
 		return [
 			firstName,
 			middleNames,
@@ -31,14 +30,17 @@ class PersonCore extends Person {
 
 	@Override
 	public void addRole(String roleToAdd) {
-		OrganizationRoleTrader personSingle = PersonRoleTrader.getInstance();
+		PersonRoleTrader personSingle = PersonRoleTrader.getInstance();
 		PersonRole newRole = personSingle.create(roleToAdd);
-		newRole.person = this;
-		roles.put(roleToAdd, newRole);
+		roles.add(newRole);
 	}
 
 	@Override
 	public Boolean hasRole(String roleToLook) {
-		return roles.containsKey(roleToLook);
+		roles.each {
+			if (it.specification == roleToLook)
+				return true;
+		}
+		return false;
 	}
 }

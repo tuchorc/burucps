@@ -1,7 +1,21 @@
 package ar.com.burucps.business
 
-class Seller {
+import ar.com.burucps.sales.ISalesRepresentative;
+import ar.com.burucps.sales.ISummarizable
+import ar.com.burucps.settlement.ICommissionable;
 
-    static constraints = {
-    }
+class Seller implements ISummarizable, ISalesRepresentative, ICommissionable {
+
+	static final SPECIFICATION = "SELLER";
+	// TODO: ver si hace falta referenciar al coordinador.
+	//static belongsTo = [group : Group, coordinator : Coordinator]
+	static belongsTo = [group : Group]
+
+	static constraints = {
+	}
+
+	@Override
+	public String getSpecification() {
+		return SPECIFICATION;
+	}
 }

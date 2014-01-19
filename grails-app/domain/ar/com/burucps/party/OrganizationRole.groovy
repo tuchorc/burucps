@@ -1,32 +1,24 @@
 package ar.com.burucps.party
 
-abstract class OrganizationRole extends Organization {
+import ar.com.burucps.library.create.Specificable;
+
+abstract class OrganizationRole extends Organization implements Specificable<String> {
+
+	static belongsTo = [organization:OrganizationCore];
 	
-	OrganizationCore organization;
 
-    static constraints = {
-    }
-
-
-	@Override
-	public String getUid() {
-		return organization.uid;
+	static constraints = {
 	}
-
-	@Override
-	public String getName() {
-		return organization.name;
-	}
+	
+	abstract String getSpecification();
 
 	@Override
 	public void addRole(String roleToAdd) {
 		organization.addRole(roleToAdd);
-		
 	}
 
 	@Override
 	public Boolean hasRole(String roleToAdd) {
 		return organization.hasRole(roleToAdd);
 	}
-	
 }
