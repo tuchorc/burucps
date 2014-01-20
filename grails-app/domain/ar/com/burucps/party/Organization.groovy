@@ -1,10 +1,14 @@
 package ar.com.burucps.party
 
-abstract class Organization extends Party {
+//TODO: debe ser abstract
+//abstract class Organization extends Party {
+class Organization extends Party {
 
     static constraints = {
     }
 	
-	abstract void addRole(String roleToAdd);
-	abstract Boolean hasRole(String roleToAdd);
+	//abstract void addRole(String roleToAdd);
+	//abstract Boolean hasRole(String roleToAdd);
+	void addRole(String roleToAdd){};
+	Boolean hasRole(String roleToAdd){};
 }

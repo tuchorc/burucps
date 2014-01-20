@@ -1,6 +1,8 @@
 package ar.com.burucps.party
 
-abstract class Party {
+//TODO: debe ser abstract
+//abstract class Party {
+class Party {
 
 	String uid;
 	String name;

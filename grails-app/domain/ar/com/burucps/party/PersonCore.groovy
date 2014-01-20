@@ -10,13 +10,9 @@ class PersonCore extends Person {
 	Date birth;
 	static hasMany = [roles:PersonRole];
 
-	def validateNotEmpty = {
-		if (!it) ['entryMissing']
-	}
-
 	static constraints = {
-		firstName (validator: validateNotEmpty(it))
-		surname (validator: validateNotEmpty(it))
+		firstName ()
+		surname ()
 		birth (max : new Date())
 	}
 
