@@ -10,7 +10,7 @@ class Seller implements ISummarizable, ISalesRepresentative, ICommissionable {
 	static final SPECIFICATION = "SELLER";
 	// TODO: ver si hace falta referenciar al coordinador.
 	//static belongsTo = [group : Group, coordinator : Coordinator]
-	static belongsTo = [group : Group]
+	static belongsTo = [group : Branch]
 	static hasMany = [transactions:Transaction]
 
 	static constraints = {
