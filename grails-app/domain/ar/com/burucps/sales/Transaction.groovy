@@ -1,7 +1,10 @@
 package ar.com.burucps.sales
 
+import ar.com.burucps.party.Party
+
 class Transaction {
-	static belongsTo = [salesRepresentative: ISalesRepresentative, operation:Operation]
+	// TODO era ISalesRepresentative
+	static belongsTo = [salesRepresentative: Party, operation:Operation]
 	Integer month
 	Integer quantity
 

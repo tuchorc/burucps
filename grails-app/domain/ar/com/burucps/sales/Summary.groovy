@@ -1,7 +1,10 @@
 package ar.com.burucps.sales
 
+import ar.com.burucps.party.Party
+
 class Summary {
-	static belongsTo = [entity:ISummarizable,operation:Operation]
+	// TODO era ISummarizable
+	static belongsTo = [entity:Party,operation:Operation]
 
     static constraints = {
     }
