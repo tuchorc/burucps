@@ -10,6 +10,10 @@ class OrganizationCore extends Organization {
 
 	static constraints = {
 	}
+	
+	static mapping = {
+		tablePerHierarchy false
+	  }
 
 	@Override
 	public void addRole(String roleToAdd) {

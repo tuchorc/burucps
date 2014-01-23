@@ -28,13 +28,9 @@
 					
 						<g:sortableColumn property="name" title="${message(code: 'personCore.name.label', default: 'Name')}" />
 					
-						<g:sortableColumn property="email" title="${message(code: 'personCore.email.label', default: 'Email')}" />
-					
-						<g:sortableColumn property="firstName" title="${message(code: 'personCore.firstName.label', default: 'First Name')}" />
-					
-						<g:sortableColumn property="surname" title="${message(code: 'personCore.surname.label', default: 'Surname')}" />
-					
 						<g:sortableColumn property="birth" title="${message(code: 'personCore.birth.label', default: 'Birth')}" />
+						
+						<g:sortableColumn property="email" title="${message(code: 'personCore.email.label', default: 'Email')}" />
 					
 					</tr>
 				</thead>
@@ -46,13 +42,9 @@
 					
 						<td>${fieldValue(bean: personCoreInstance, field: "name")}</td>
 					
-						<td>${fieldValue(bean: personCoreInstance, field: "email")}</td>
-					
-						<td>${fieldValue(bean: personCoreInstance, field: "firstName")}</td>
-					
-						<td>${fieldValue(bean: personCoreInstance, field: "surname")}</td>
-					
 						<td><g:formatDate date="${personCoreInstance.birth}" /></td>
+
+						<td>${fieldValue(bean: personCoreInstance, field: "email")}</td>
 					
 					</tr>
 				</g:each>

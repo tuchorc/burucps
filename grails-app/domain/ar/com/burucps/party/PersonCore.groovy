@@ -11,10 +11,13 @@ class PersonCore extends Person {
 	static hasMany = [roles:PersonRole];
 
 	static constraints = {
-		firstName ()
-		surname ()
-		birth (max : new Date())
+		firstName (blank: false)
+		middleNames (blank:true)
+		surname (blank: false)
+		birth (blank: true, max : new Date())
 	}
+
+	static mapping = { tablePerHierarchy false }
 
 	public String getFullName() {
 		return [

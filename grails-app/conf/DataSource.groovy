@@ -1,7 +1,8 @@
 dataSource{
     pooled = true
-    driverClassName = "com.mysql.jdbc.Driver"
-	dialect = "org.hibernate.dialect.MySQL5InnoDBDialect"
+    //driverClassName = "com.mysql.jdbc.Driver"
+	//dialect = "org.hibernate.dialect.MySQL5InnoDBDialect"
+	driverClassName="org.h2.Driver"
 }
 
 hibernate {
@@ -15,9 +16,9 @@ hibernate {
 environments {
     development {
         dataSource {
-            dbCreate = "update" // one of 'create', 'create-drop', 'update', 'validate', ''
-            //url = "jdbc:h2:prodDb;MVCC=TRUE;LOCK_TIMEOUT=10000;DB_CLOSE_ON_EXIT=FALSE"
-			url = "jdbc:mysql://localhost/burucps?useUnicode=yes&characterEncoding=UTF-8"
+            dbCreate = "create-drop" // one of 'create', 'create-drop', 'update', 'validate', ''
+            url = "jdbc:h2:devDb;MVCC=TRUE;LOCK_TIMEOUT=10000;DB_CLOSE_ON_EXIT=FALSE"
+			//url = "jdbc:mysql://localhost/burucps?useUnicode=yes&characterEncoding=UTF-8"
 			username = "dev"
 			password = "devpwd"
         }

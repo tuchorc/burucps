@@ -11,6 +11,6 @@ class Party {
 	static constraints = {
 		uid (blank: false)
 		name (blank: false)
-		email (email : true)
+		email (blank:true,email : true)
 	}
 }
