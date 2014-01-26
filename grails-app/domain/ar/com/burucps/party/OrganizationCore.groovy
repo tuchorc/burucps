@@ -27,7 +27,7 @@ class OrganizationCore extends Organization {
 			it.save()
 		}
 	}
-
+	
 	@Override
 	public void addRole(String roleToAdd) {
 		OrganizationRoleTrader organizationSingle = OrganizationRoleTrader.getInstance();

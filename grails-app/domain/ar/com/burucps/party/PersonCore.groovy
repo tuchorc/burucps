@@ -7,7 +7,7 @@ class PersonCore extends Person {
 	String firstName;
 	String middleNames;
 	String surname;
-	Date birth;
+	Date dateOfBirth;
 	static hasMany = [roles:PersonRole];
 
 	static constraints = {
