@@ -4,9 +4,11 @@ package ar.com.burucps.party
 //abstract class Organization extends Party {
 class Organization extends Party {
 
-    static constraints = {
-    }
-	
+	static constraints = {
+	}
+
+	static mapping = { tablePerHierarchy false }
+
 	//abstract void addRole(String roleToAdd);
 	//abstract Boolean hasRole(String roleToAdd);
 	void addRole(String roleToAdd){};

@@ -11,15 +11,28 @@ class OrganizationCore extends Organization {
 	static constraints = {
 	}
 	
-	static mapping = {
-		tablePerHierarchy false
-	  }
+	static mapping = { tablePerHierarchy false }
+	
+	def beforeInsert() {
+	 }
+	
+	def beforeUpdate() {
+	 }
+	
+	def afterUpdate() {
+		roles.each {
+			it.uid = this.uid
+			it.name = this.name
+			it.email = this.email
+			it.save()
+		}
+	}
 
 	@Override
 	public void addRole(String roleToAdd) {
 		OrganizationRoleTrader organizationSingle = OrganizationRoleTrader.getInstance();
 		OrganizationRole newRole = organizationSingle.create(roleToAdd);
-		roles.add(newRole);
+		this.addToRoles(newRole);
 	}
 
 	@Override

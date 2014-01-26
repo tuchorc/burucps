@@ -13,6 +13,8 @@ class Seller implements ISummarizable, ISalesRepresentative, ICommissionable {
 	static belongsTo = [group : Branch]
 	static hasMany = [transactions:Transaction]
 
+	static mapping = { tablePerHierarchy false }
+
 	static constraints = {
 	}
 

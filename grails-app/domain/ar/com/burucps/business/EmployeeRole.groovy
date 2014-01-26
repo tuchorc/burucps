@@ -2,12 +2,16 @@ package ar.com.burucps.business
 
 import ar.com.burucps.business.Employee;
 
+// TODO debe ser abstract
+// abstract class EmployeeRole extends Employee {
 class EmployeeRole extends Employee {
 
 	static belongsTo = [employee:EmployeeCore];
 	
     static constraints = {
     }
+	
+	static mapping = { tablePerHierarchy false }
 	
 	@Override
 	public void addRole(String roleToAdd) {

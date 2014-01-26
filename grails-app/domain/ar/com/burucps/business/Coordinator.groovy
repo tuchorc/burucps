@@ -13,6 +13,8 @@ class Coordinator implements ISummarizable, ICommissionable {
     static constraints = {
     }
 	
+	static mapping = { tablePerHierarchy false }
+	
 	@Override
 	public String getSpecification() {
 		return SPECIFICATION;

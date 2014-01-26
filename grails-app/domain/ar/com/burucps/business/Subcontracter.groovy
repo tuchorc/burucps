@@ -16,6 +16,8 @@ class Subcontracter extends OrganizationRole implements ISummarizable, ISalesRep
 
     static constraints = {
     }
+	
+	static mapping = { tablePerHierarchy false }
 
 	@Override
 	public String getSpecification() {

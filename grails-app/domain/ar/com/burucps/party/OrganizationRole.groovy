@@ -7,13 +7,15 @@ import ar.com.burucps.library.create.Specificable;
 class OrganizationRole extends Organization implements Specificable<String> {
 
 	static belongsTo = [organization:OrganizationCore];
-	
 
 	static constraints = {
+		organization (nullable: false, blank : false)
 	}
-	
-	String getSpecification(){};
+
+	static mapping = { tablePerHierarchy false }
+
 	//abstract String getSpecification();
+	String getSpecification(){};
 
 	@Override
 	public void addRole(String roleToAdd) {
@@ -24,4 +26,11 @@ class OrganizationRole extends Organization implements Specificable<String> {
 	public Boolean hasRole(String roleToAdd) {
 		return organization.hasRole(roleToAdd);
 	}
+
+	def beforeInsert() {
+		uid = organization.uid
+		name = organization.name
+		email = organization.email
+	}
+
 }

@@ -7,6 +7,8 @@ class Person  extends Party {
 	static constraints = {
 	}
 
+	static mapping = { tablePerHierarchy false }
+
 	//abstract void addRole(String roleToAdd);
 	//abstract Boolean hasRole(String roleToAdd);
 	void addRole(String roleToAdd){};

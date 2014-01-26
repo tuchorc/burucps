@@ -8,9 +8,34 @@ class Party {
 	String name;
 	String email;
 
+	// Auiditoria
+	Date creationDate;
+	String createdBy;
+	Date lastUpdateDate;
+	String lastUpdateBy;
+
+
+	static mapping = { tablePerHierarchy false }
+
 	static constraints = {
-		uid (blank: false)
-		name (blank: false)
-		email (blank:true,email : true)
+		uid (nullable: true)
+		name (blank: false, nullable: true)
+		email (email : true, nullable: true)
+		// Auditoria
+		creationDate (nullable: true);
+		createdBy (nullable: true);
+		lastUpdateDate (nullable: true);
+		lastUpdateBy (nullable: true);
 	}
+	
+	def beforeInsert() {
+		//createdBy = securityService.currentAuthenticatedUsername()
+		creationDate = new Date();
+		lastUpdateDate = new Date();
+	 }
+	
+	def beforeUpdate() {
+		//lastUpdatedBy = securityService.currentAuthenticatedUsername()
+		lastUpdateDate = new Date();
+	 }
 }

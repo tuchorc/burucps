@@ -1,7 +1,9 @@
 package ar.com.burucps.settlement
 
-class StatementFixedItem {
+class StatementFixedItem extends Statement {
 
     static constraints = {
     }
+	
+	static mapping = { tablePerHierarchy true }
 }

@@ -11,13 +11,35 @@ class PersonCore extends Person {
 	static hasMany = [roles:PersonRole];
 
 	static constraints = {
-		firstName (blank: false)
-		middleNames (blank:true)
-		surname (blank: false)
-		birth (blank: true, max : new Date())
+		firstName (nullable: true)
+		middleNames (nullable: true)
+		surname (blank: false, nullable: true)
+		birth (max : new Date(), nullable: true)
 	}
 
 	static mapping = { tablePerHierarchy false }
+	
+	def beforeValidate() {
+		name = getFullName();
+	}
+	
+	def beforeInsert() {
+	 }
+	
+	def afterInsert() {
+	}
+	
+	def beforeUpdate() {
+	 }
+	
+	def afterUpdate() {
+		roles.each {
+			it.uid = this.uid
+			it.name = this.name
+			it.email = this.email
+			it.save()
+		}
+	}
 
 	public String getFullName() {
 		return [
@@ -31,7 +53,7 @@ class PersonCore extends Person {
 	public void addRole(String roleToAdd) {
 		PersonRoleTrader personSingle = PersonRoleTrader.getInstance();
 		PersonRole newRole = personSingle.create(roleToAdd);
-		roles.add(newRole);
+		addToRoles(newRole);
 	}
 
 	@Override
