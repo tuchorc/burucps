@@ -14,7 +14,7 @@ class PersonCore extends Person {
 		firstName (nullable: true)
 		middleNames (nullable: true)
 		surname (blank: false, nullable: true)
-		birth (max : new Date(), nullable: true)
+		dateOfBirth (max : new Date(), nullable: true)
 	}
 
 	static mapping = { tablePerHierarchy false }

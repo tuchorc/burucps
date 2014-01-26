@@ -19,7 +19,7 @@ class Party {
 
 	static constraints = {
 		uid (nullable: true)
-		name (blank: false, nullable: true)
+		name (nullable: false)
 		email (email : true, nullable: true)
 		// Auditoria
 		creationDate (nullable: true);
