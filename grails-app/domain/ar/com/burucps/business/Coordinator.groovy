@@ -6,7 +6,7 @@ import ar.com.burucps.settlement.ICommissionable;
 class Coordinator implements ISummarizable, ICommissionable {
 	// TODO: ver si minima unidad de coordinacion es pto de venta
 	//static hasMany = [groupsAssigend : Group, sellers:Seller]
-	static hasMany = [groupsAssigend : Branch]
+	//static hasMany = [businessUnitsToCoordinate : BusinessUnit]
 	
 	static final SPECIFICATION = "COORDINATOR";
 
