@@ -7,6 +7,9 @@ import grails.transaction.Transactional
 
 @Transactional(readOnly = true)
 class PersonCoreController {
+	
+	static Boolean linkMe = true
+	static String btnName = "Empleados"
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 

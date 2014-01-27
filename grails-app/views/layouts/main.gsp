@@ -20,7 +20,9 @@
 		<r:layoutResources />
     </head>
 	<body>
-		<div id="burucpsLogo" role="banner"><img width="240px" src="${resource(dir: 'images', file: 'burucps_logo.png')}" alt="BuruCPS"/></div>
+		<div id="burucpsLogo" role="banner">
+			<a class="home" href="/burucps/"><img width="240px" src="${resource(dir: 'images', file: 'burucps_logo.png')}" alt="BuruCPS"/></a>
+		</div>
 		<g:layoutBody/>
 		<div class="footer" role="contentinfo"></div>
 		<div id="spinner" class="spinner" style="display:none;"><g:message code="spinner.alt" default="Loading&hellip;"/></div>
