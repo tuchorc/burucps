@@ -1,2 +1,22 @@
 @import "bootstrap.less";
-# https://github.com/twbs/bootstrap/tree/v2.0.2/less
+// https://github.com/twbs/bootstrap/tree/v2.0.2/less
+
+// Alternate styles
+// ----------------
+
+.alert-success {
+  background-color: @successBackground;
+  border-color: @successBorder;  
+  color: @successText;
+}
+.alert-danger,
+.alert-error {
+  background-color: @errorBackground;
+  border-color: @errorBorder;
+  color: @errorText;
+}
+.alert-info {
+  background-color: @infoBackground;
+  border-color: @infoBorder;
+  color: @infoText;
+}

@@ -18,7 +18,6 @@
 		<g:layoutHead/>
 		<g:javascript library="application"/>		
 		<r:layoutResources />
-		<g:layoutTitle/>
     </head>
 	<body>
 		<div id="burucpsLogo" role="banner"><img width="240px" src="${resource(dir: 'images', file: 'burucps_logo.png')}" alt="BuruCPS"/></div>
