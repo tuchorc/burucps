@@ -14,9 +14,15 @@ class OrganizationCore extends Organization {
 	static mapping = { tablePerHierarchy false }
 	
 	def beforeInsert() {
+		//createdBy = securityService.currentAuthenticatedUsername()
+		//lastUpdatedBy = securityService.currentAuthenticatedUsername()
+		creationDate = new Date();
+		lastUpdateDate = new Date();
 	 }
 	
 	def beforeUpdate() {
+		//lastUpdatedBy = securityService.currentAuthenticatedUsername()
+		lastUpdateDate = new Date();
 	 }
 	
 	def afterUpdate() {
@@ -42,5 +48,10 @@ class OrganizationCore extends Organization {
 				return true;
 		}
 		return false;
+	}
+	
+	@Override
+	String toString() {
+		return name;
 	}
 }

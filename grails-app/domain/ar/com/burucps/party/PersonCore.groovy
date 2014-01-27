@@ -18,20 +18,26 @@ class PersonCore extends Person {
 	}
 
 	static mapping = { tablePerHierarchy false }
-	
+
 	def beforeValidate() {
 		name = getFullName();
 	}
-	
+
 	def beforeInsert() {
-	 }
-	
+		//createdBy = securityService.currentAuthenticatedUsername()
+		//lastUpdatedBy = securityService.currentAuthenticatedUsername()
+		creationDate = new Date();
+		lastUpdateDate = new Date();
+	}
+
 	def afterInsert() {
 	}
-	
+
 	def beforeUpdate() {
-	 }
-	
+		//lastUpdatedBy = securityService.currentAuthenticatedUsername()
+		lastUpdateDate = new Date();
+	}
+
 	def afterUpdate() {
 		roles.each {
 			it.uid = this.uid
@@ -42,11 +48,16 @@ class PersonCore extends Person {
 	}
 
 	public String getFullName() {
-		return [
-			firstName,
-			middleNames,
-			surname
-		].join(' ');
+		def list = []
+		if (firstName && firstName.trim())
+			list << firstName;
+		if (middleNames && middleNames.trim())
+			list << surname;
+		if (surname && surname.trim())
+			list << surname;
+		if (list.size() > 0)
+			return list.join(' ');
+		return null;
 	}
 
 	@Override
@@ -63,5 +74,10 @@ class PersonCore extends Person {
 				return true;
 		}
 		return false;
+	}
+	
+	@Override
+	String toString() {
+		return name;
 	}
 }

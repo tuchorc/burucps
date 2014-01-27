@@ -30,6 +30,7 @@ class Party {
 	
 	def beforeInsert() {
 		//createdBy = securityService.currentAuthenticatedUsername()
+		//lastUpdatedBy = securityService.currentAuthenticatedUsername()
 		creationDate = new Date();
 		lastUpdateDate = new Date();
 	 }
