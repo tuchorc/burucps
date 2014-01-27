@@ -50,8 +50,7 @@ class OrganizationCore extends Organization {
 		return false;
 	}
 	
-	@Override
 	String toString() {
-		return name;
+		"$name";
 	}
 }

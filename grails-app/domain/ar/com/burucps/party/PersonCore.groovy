@@ -76,8 +76,7 @@ class PersonCore extends Person {
 		return false;
 	}
 	
-	@Override
 	String toString() {
-		return name;
+		"$name";
 	}
 }
