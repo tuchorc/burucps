@@ -32,7 +32,7 @@
 	<label for="parent"> <g:message
 			code="businessUnit.parent.label" default="Parent" />
 	</label>
-	<g:select id="parent" name="parent.id"
+	<g:select id="parent" name="parent.id" noSelection="['':'-']"
 		from="${ar.com.burucps.business.BusinessUnit.list()}" optionKey="id"
 		value="${businessUnitInstance?.parent?.id}" class="many-to-one" />
 </div>
