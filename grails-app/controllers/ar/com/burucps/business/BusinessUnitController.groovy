@@ -8,8 +8,8 @@ import grails.transaction.Transactional
 @Transactional(readOnly = true)
 class BusinessUnitController {
 	
-	static Boolean linkMe = false
-	static String btnName = ""
+	static Boolean linkMe = true
+	static String btnName = "businessUnit.btnLabel"
 	
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
