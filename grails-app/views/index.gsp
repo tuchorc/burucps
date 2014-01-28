@@ -128,7 +128,7 @@ p {
 					<g:if test="${c.getStaticPropertyValue('linkMe', Boolean)}">
 						<li class="controller"><g:link
 								controller="${c.logicalPropertyName}">
-								${c.getStaticPropertyValue('btnName', String)}
+								<g:message code="${c.getStaticPropertyValue('btnName', String)}" />
 							</g:link></li>
 					</g:if>
 				</g:each>
