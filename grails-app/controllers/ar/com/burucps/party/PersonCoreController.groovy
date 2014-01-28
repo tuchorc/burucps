@@ -9,7 +9,7 @@ import grails.transaction.Transactional
 class PersonCoreController {
 	
 	static Boolean linkMe = true
-	static String btnName = "Empleados"
+	static String btnName = "personCore.btnLabel"
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 

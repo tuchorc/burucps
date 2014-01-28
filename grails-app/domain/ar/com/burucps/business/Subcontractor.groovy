@@ -2,6 +2,7 @@ package ar.com.burucps.business
 
 import org.aspectj.bridge.ICommand;
 
+import ar.com.burucps.party.OrganizationCore;
 import ar.com.burucps.party.OrganizationRole
 import ar.com.burucps.sales.ISalesRepresentative
 import ar.com.burucps.sales.ISummarizable;
@@ -13,10 +14,18 @@ class Subcontractor extends OrganizationRole implements ISummarizable, ISalesRep
 	
 	static final SPECIFICATION = "SUBCONTRACTER";
 	static hasMany = [transactions:Transaction]
-	static belongsTo = [businessUnit : BusinessUnit]
+	static belongsTo = [core : OrganizationCore, businessUnit : BusinessUnit]
 
     static constraints = {
+		core (nullable:false)
+		businessUnit (nullable:false)
     }
+	
+	def beforeInsert() {
+		this.uid = core.uid
+		this.name = core.name
+		this.email = core.email
+	}
 	
 	static mapping = { tablePerHierarchy false }
 
