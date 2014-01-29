@@ -1,5 +1,7 @@
 package ar.com.burucps.party
 
+import java.util.Date;
+
 import ar.com.burucps.library.create.Specificable;
 
 //TODO: debe ser abstract
@@ -17,19 +19,54 @@ class PersonRole extends Person implements Specificable<String> {
 	//abstract String getSpecification();
 	String getSpecification(){};
 
-	@Override
-	public void addRole(String roleToAdd) {
-		person.addRole(roleToAdd);
+	String getFirstName(){
+		return person.firstName
 	}
 
-	@Override
-	public Boolean hasRole(String roleToAdd) {
+	void setFirstName(String firstName){
+		person.firstName = firstName
+	}
+
+	String getMiddleNames(){
+		return person.middleNames
+	}
+
+	void setMiddleNames(String middleNames){
+		person.middleNames = middleNames
+	}
+
+	String getSurname(){
+		return person.surname
+	}
+
+	void setSurname(String surname){
+		person.surname = surname
+	}
+
+	Date getDateOfBirth(){
+		return person.dateOfBirth
+	}
+
+	void setDateOfBirth(Date dateOfBirth){
+		person.dateOfBirth = dateOfBirth
+	}
+
+	Person addRole(String roleToAdd) {
+		return person.addRole(roleToAdd);
+	}
+
+	Boolean hasRole(String roleToAdd) {
 		return person.hasRole(roleToAdd);
 	}
 
+	void removeRole(String roleSpec){
+		person.removeRole(roleSpec);
+	}
+
+	Person getRole(String roleSpec){
+		return person.getRole(roleSpec)
+	}
+
 	def beforeInsert() {
-		uid = person.uid
-		name = person.name
-		email = person.email
 	}
 }

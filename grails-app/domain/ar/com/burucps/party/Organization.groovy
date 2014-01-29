@@ -9,8 +9,9 @@ class Organization extends Party {
 
 	static mapping = { tablePerHierarchy false }
 
-	//abstract void addRole(String roleToAdd);
-	//abstract Boolean hasRole(String roleToAdd);
-	void addRole(String roleToAdd){};
-	Boolean hasRole(String roleToAdd){};
+	//Todo abstract
+	Organization addRole(String roleSpec){}
+	Boolean hasRole(String roleSpec){}
+	void removeRole(String roleSpec){}
+	Organization getRole(String roleSpec){}
 }

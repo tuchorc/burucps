@@ -1,26 +1,40 @@
 package ar.com.burucps.party
 
+import java.util.Date;
 import java.util.Map;
 
 class PersonCore extends Person {
 
+	String uid;
+	String email;
 	String firstName;
 	String middleNames;
 	String surname;
 	Date dateOfBirth;
-	static hasMany = [roles:PersonRole];
+	static hasMany = [roles : PersonRole];
+	// Auiditoria
+	Date creationDate;
+	String createdBy;
+	Date lastUpdateDate;
+	String lastUpdateBy;
 
 	static constraints = {
+		uid (nullable: true)
+		email (email : true, nullable: true)
 		firstName (nullable: true)
 		middleNames (nullable: true)
 		surname (blank: false, nullable: true)
 		dateOfBirth (max : new Date(), nullable: true)
+		// Auditoria
+		creationDate (nullable: true);
+		createdBy (nullable: true);
+		lastUpdateDate (nullable: true);
+		lastUpdateBy (nullable: true);
 	}
 
 	static mapping = { tablePerHierarchy false }
 
 	def beforeValidate() {
-		name = getFullName();
 	}
 
 	def beforeInsert() {
@@ -30,24 +44,12 @@ class PersonCore extends Person {
 		lastUpdateDate = new Date();
 	}
 
-	def afterInsert() {
-	}
-
 	def beforeUpdate() {
 		//lastUpdatedBy = securityService.currentAuthenticatedUsername()
 		lastUpdateDate = new Date();
 	}
 
-	def afterUpdate() {
-		roles.each {
-			it.uid = this.uid
-			it.name = this.name
-			it.email = this.email
-			it.save()
-		}
-	}
-
-	public String getFullName() {
+	public String getName() {
 		def list = []
 		if (firstName && firstName.trim())
 			list << firstName;
@@ -60,22 +62,38 @@ class PersonCore extends Person {
 		return null;
 	}
 
-	@Override
-	public void addRole(String roleToAdd) {
+	Person addRole(String roleSpec) {
 		PersonRoleTrader personSingle = PersonRoleTrader.getInstance();
-		PersonRole newRole = personSingle.create(roleToAdd);
+		PersonRole newRole = personSingle.create(roleSpec);
 		addToRoles(newRole);
+		return newRole
 	}
 
-	@Override
-	public Boolean hasRole(String roleToLook) {
+	Boolean hasRole(String roleSpec) {
 		roles.each {
-			if (it.specification == roleToLook)
+			if (it.specification == roleSpec)
 				return true;
 		}
 		return false;
 	}
-	
+
+	void removeRole(String roleSpec){
+		roles.each {
+			if (it.specification == roleSpec) {
+				roles.remove(it);
+				return;
+			}
+		}
+	}
+
+	Person getRole(String roleSpec){
+		roles.each {
+			if (it.specification == roleSpec)
+				return it;
+		}
+		return null;
+	}
+
 	String toString() {
 		"$name";
 	}

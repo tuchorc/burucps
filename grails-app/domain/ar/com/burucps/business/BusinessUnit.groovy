@@ -2,7 +2,7 @@ package ar.com.burucps.business
 
 import java.util.Date;
 
-import ar.com.burucps.party.Party
+//import ar.com.burucps.party.Party
 import ar.com.burucps.sales.ISalesRepresentative;
 import ar.com.burucps.sales.ISummarizable;
 
@@ -17,7 +17,7 @@ class BusinessUnit implements ISummarizable  {
 	String lastUpdateBy;
 
 	// TODO era ISalesRepresentative
-	static hasMany = [salesRepresentatives : Party]
+	//static hasMany = [salesRepresentatives : Party]
 	static belongsTo = [coordinator : Coordinator, parent : BusinessUnit]
 
 	static constraints = {

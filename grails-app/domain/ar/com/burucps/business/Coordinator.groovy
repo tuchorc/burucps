@@ -7,14 +7,14 @@ class Coordinator implements ISummarizable, ICommissionable {
 	// TODO: ver si minima unidad de coordinacion es pto de venta
 	//static hasMany = [groupsAssigend : Group, sellers:Seller]
 	static hasMany = [businessUnitsToCoordinate : BusinessUnit]
-	
+
 	static final SPECIFICATION = "COORDINATOR";
 
-    static constraints = {
-    }
-	
+	static constraints = {
+	}
+
 	static mapping = { tablePerHierarchy false }
-	
+
 	@Override
 	public String getSpecification() {
 		return SPECIFICATION;

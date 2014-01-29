@@ -17,20 +17,20 @@ class OrganizationRole extends Organization implements Specificable<String> {
 	//abstract String getSpecification();
 	String getSpecification(){};
 
-	@Override
-	public void addRole(String roleToAdd) {
-		organization.addRole(roleToAdd);
+	Organization addRole(String roleToAdd) {
+		return organization.addRole(roleToAdd);
 	}
 
-	@Override
-	public Boolean hasRole(String roleToAdd) {
+	Boolean hasRole(String roleToAdd) {
 		return organization.hasRole(roleToAdd);
 	}
+	
+	void removeRole(String roleSpec){
+		organization.removeRole(roleSpec);
+	}
 
-	def beforeInsert() {
-		uid = organization.uid
-		name = organization.name
-		email = organization.email
+	Organization getRole(String roleSpec){
+		return organization.getRole(roleSpec)
 	}
 
 }

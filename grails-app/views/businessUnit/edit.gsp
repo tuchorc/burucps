@@ -46,19 +46,6 @@
 				value="${businessUnitInstance?.version}" />
 			<fieldset class="form">
 				<g:render template="form" />
-				<div
-					class="fieldcontain ${hasErrors(bean: businessUnitInstance, field: 'salesRepresentatives', 'error')} ">
-					<label for="salesRepresentatives"> <g:message
-							code="businessUnit.salesRepresentatives.label"
-							default="Sales Representatives" />
-
-					</label>
-					<g:select name="salesRepresentatives"
-						from="${ar.com.burucps.party.Party.list()}" multiple="multiple"
-						optionKey="id" size="5"
-						value="${businessUnitInstance?.salesRepresentatives*.id}"
-						class="many-to-many" />
-				</div>
 
 			</fieldset>
 			<fieldset class="buttons">

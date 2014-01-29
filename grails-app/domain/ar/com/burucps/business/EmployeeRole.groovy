@@ -7,25 +7,26 @@ import ar.com.burucps.business.Employee;
 class EmployeeRole extends Employee {
 
 	static belongsTo = [employee:EmployeeCore];
-	
-    static constraints = {
-    }
-	
-	static mapping = { tablePerHierarchy false }
-	
-	@Override
-	public void addRole(String roleToAdd) {
-		employee.addRole(roleToAdd);
-		
+
+	static constraints = {
 	}
 
-	@Override
-	public Boolean hasRole(String roleToAdd) {
+	static mapping = { tablePerHierarchy false }
+
+	Employee addRole(String roleToAdd) {
+		return employee.addRole(roleToAdd);
+	}
+
+	Boolean hasRole(String roleToAdd) {
 		return employee.hasRole(roleToAdd);
 	}
-	
-	@Override
-	public String getSpecification() {
-		return employee.SPECIFICATION;
+
+	void removeRole(String roleToAdd) {
+		employee.removeRole(roleToAdd);
 	}
+
+	Employee getRole(String roleToAdd) {
+		return employee.getRole(roleToAdd);
+	}
+
 }

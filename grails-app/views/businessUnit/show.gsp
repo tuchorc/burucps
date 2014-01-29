@@ -71,20 +71,6 @@
 						</g:link></span></li>
 			</g:if>
 
-			<g:if test="${businessUnitInstance?.salesRepresentatives}">
-				<li class="fieldcontain"><span id="salesRepresentatives-label"
-					class="property-label"><g:message
-							code="businessUnit.salesRepresentatives.label"
-							default="Sales Representatives" /></span> <g:each
-						in="${businessUnitInstance.salesRepresentatives}" var="s">
-						<span class="property-value"
-							aria-labelledby="salesRepresentatives-label"><g:link
-								controller="party" action="show" id="${s.id}">
-								${s?.encodeAsHTML()}
-							</g:link></span>
-					</g:each></li>
-			</g:if>
-
 			<g:if test="${businessUnitInstance?.creationDate}">
 				<li class="fieldcontain"><span id="creationDate-label"
 					class="property-label"><g:message

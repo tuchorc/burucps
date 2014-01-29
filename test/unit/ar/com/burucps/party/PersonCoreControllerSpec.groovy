@@ -1,7 +1,5 @@
 package ar.com.burucps.party
 
-
-
 import grails.test.mixin.*
 import spock.lang.*
 

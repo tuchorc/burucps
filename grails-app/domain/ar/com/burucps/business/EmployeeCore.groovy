@@ -2,6 +2,8 @@ package ar.com.burucps.business
 
 import java.util.List;
 
+import ar.com.burucps.party.Organization;
+
 class EmployeeCore  extends Employee {
 
 	static final SPECIFICATION = "EMPLOYEE";
@@ -14,20 +16,39 @@ class EmployeeCore  extends Employee {
 
 	static mapping = { tablePerHierarchy false }
 
-	@Override
-	public void addRole(String roleToAdd) {
-		EmployeeRoleTrader employeeSingle = EmployeeRoleTrader.getInstance();
-		EmployeeRole newRole = employeeSingle.create(roleToAdd);
+	Employee addRole(String roleSpec) {
+		def employeeSingle = EmployeeRoleTrader.getInstance();
+		def newRole = employeeSingle.create(roleSpec);
 		newRole.employee = this;
-		roles.put(roleToAdd, newRole);
+		roles.put(roleSpec, newRole);
+		return newRole
 	}
 
-	@Override
-	public Boolean hasRole(String roleToLook) {
-		return roles.containsKey(roleToLook);
+	Boolean hasRole(String roleSpec) {
+		roles.each {
+			if (it.specification == roleSpec)
+				return true;
+		}
+		return false;
+	}
+	
+	void removeRole(String roleSpec){
+		roles.each {
+			if (it.specification == roleSpec) {
+				roles.remove(it);
+				return;
+			}
+		}
 	}
 
-	@Override
+	Employee getRole(String roleSpec){
+		roles.each {
+			if (it.specification == roleSpec)
+				return it;
+		}
+		return null;
+	}
+
 	public String getSpecification() {
 		return SPECIFICATION;
 	}

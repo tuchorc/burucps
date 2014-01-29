@@ -16,10 +16,10 @@ class Seller implements ISummarizable, ISalesRepresentative, ICommissionable {
 	static mapping = { tablePerHierarchy false }
 
 	static constraints = {
+		businessUnit(nullable:false, blank:false)
 	}
 
-	@Override
-	public String getSpecification() {
+	String getSpecification() {
 		return SPECIFICATION;
 	}
 }
