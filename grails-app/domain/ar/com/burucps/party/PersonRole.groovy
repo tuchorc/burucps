@@ -2,7 +2,7 @@ package ar.com.burucps.party
 
 import java.util.Date;
 
-class PersonRole extends Person {
+abstract class PersonRole extends Person {
 
 	static belongsTo = [person:PersonCore];
 

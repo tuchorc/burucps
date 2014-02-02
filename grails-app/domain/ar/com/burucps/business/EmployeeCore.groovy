@@ -1,13 +1,14 @@
-package ar.com.burucps.party
+package ar.com.burucps.business
 
-class PersonCore extends Person {
-	String uid;
-	String email;
-	String firstName;
-	String middleNames;
-	String surname;
-	Date dateOfBirth;
-	static hasMany = [roles : PersonRole];
+import java.util.Date;
+
+import ar.com.burucps.party.PersonCore
+
+class EmployeeCore extends Employee {
+	static final specification = "EMPLOYEE";
+	PersonCore person;
+	Long employeeNumber;
+	static hasMany = [roles:EmployeeRole];
 	// Auiditoria
 	Date creationDate;
 	String createdBy;
@@ -15,12 +16,7 @@ class PersonCore extends Person {
 	String lastUpdateBy;
 
 	static constraints = {
-		uid (nullable: true)
-		email (email : true, nullable: true)
-		firstName (blank: false, nullable: true)
-		middleNames (nullable: true)
-		surname (blank: false, nullable: true)
-		dateOfBirth (max : new Date(), nullable: true)
+		employeeNumber (unique:true, blank : false, nullable : false, min : 1L)
 		// Auditoria
 		creationDate (nullable: true);
 		createdBy (nullable: true);
@@ -42,7 +38,7 @@ class PersonCore extends Person {
 
 
 	@Override
-	public Person addRole(String roleSpec) {
+	public Employee addRole(String roleSpec) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -60,26 +56,8 @@ class PersonCore extends Person {
 	}
 
 	@Override
-	public Person getRole(String roleSpec) {
+	public Employee getRole(String roleSpec) {
 		// TODO Auto-generated method stub
 		return null;
-	}
-
-	@Override
-	public String getName() {
-		def list = []
-		if (firstName && firstName.trim())
-			list << firstName;
-		if (middleNames && middleNames.trim())
-			list << surname;
-		if (surname && surname.trim())
-			list << surname;
-		if (list.size() > 0)
-			return list.join(' ');
-		return null;
-	}
-	
-	String toString() {
-		"$name";
 	}
 }
