@@ -1,7 +1,5 @@
 package ar.com.burucps.business
 
-import java.util.Date;
-
 import ar.com.burucps.party.PersonCore
 
 class EmployeeCore extends Employee {
@@ -27,13 +25,13 @@ class EmployeeCore extends Employee {
 	def beforeInsert() {
 		//createdBy = securityService.currentAuthenticatedUsername()
 		//lastUpdatedBy = securityService.currentAuthenticatedUsername()
-		creationDate = new Date();
-		lastUpdateDate = new Date();
+		creationDate = new Date()
+		lastUpdateDate = new Date()
 	}
 
 	def beforeUpdate() {
 		//lastUpdatedBy = securityService.currentAuthenticatedUsername()
-		lastUpdateDate = new Date();
+		lastUpdateDate = new Date()
 	}
 
 

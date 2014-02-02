@@ -31,13 +31,13 @@ class PersonCore extends Person {
 	def beforeInsert() {
 		//createdBy = securityService.currentAuthenticatedUsername()
 		//lastUpdatedBy = securityService.currentAuthenticatedUsername()
-		creationDate = new Date();
-		lastUpdateDate = new Date();
+		creationDate = new Date()
+		lastUpdateDate = new Date()
 	}
 
 	def beforeUpdate() {
 		//lastUpdatedBy = securityService.currentAuthenticatedUsername()
-		lastUpdateDate = new Date();
+		lastUpdateDate = new Date()
 	}
 
 

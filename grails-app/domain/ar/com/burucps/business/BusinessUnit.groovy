@@ -1,24 +1,31 @@
 package ar.com.burucps.business
 
-class Coordinator extends EmployeeRole {
+import ar.com.burucps.party.Party
 
-		static final specification = "COORDINATOR";
-	
-	EmployeeCore employee
-	Set<BusinessUnit> businessUnitsToCoordinate
+class BusinessUnit {
+	String code
+	String name
+	static belongsTo = [parent: BusinessUnit]
+	Coordinator coordinator
+	// sales representatives must implement ISalesRepresentative
+	Set<Party> salesRepresentatives 
 	// Auiditoria
 	Date creationDate
 	String createdBy
 	Date lastUpdateDate
 	String lastUpdateBy
 
-	static constraints = {
+    static constraints = {
+		code (unique: true, blank: false, nullable: false)
+		name (unique: true, blank: false, nullable: false)
+		parent (nullable: true)
+		coordinator (blank: false, nullable: true)
 		// Auditoria
 		creationDate (nullable: true)
 		createdBy (nullable: true)
 		lastUpdateDate (nullable: true)
 		lastUpdateBy (nullable: true)
-	}
+    }
 	
 	def beforeInsert() {
 		//createdBy = securityService.currentAuthenticatedUsername()
