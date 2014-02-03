@@ -8,14 +8,14 @@ class BusinessUnit {
 	static belongsTo = [parent: BusinessUnit]
 	Coordinator coordinator
 	// sales representatives must implement ISalesRepresentative
-	Set<Party> salesRepresentatives 
+	Set<Party> salesRepresentatives
 	// Auiditoria
 	Date creationDate
 	String createdBy
 	Date lastUpdateDate
 	String lastUpdateBy
 
-    static constraints = {
+	static constraints = {
 		code (unique: true, blank: false, nullable: false)
 		name (unique: true, blank: false, nullable: false)
 		parent (nullable: true)
@@ -25,8 +25,8 @@ class BusinessUnit {
 		createdBy (nullable: true)
 		lastUpdateDate (nullable: true)
 		lastUpdateBy (nullable: true)
-    }
-	
+	}
+
 	def beforeInsert() {
 		//createdBy = securityService.currentAuthenticatedUsername()
 		//lastUpdatedBy = securityService.currentAuthenticatedUsername()
@@ -38,4 +38,21 @@ class BusinessUnit {
 		//lastUpdatedBy = securityService.currentAuthenticatedUsername()
 		lastUpdateDate = new Date()
 	}
+
+	def addSubcontractor(Subcontractor subcontractor) {
+		addToSalesRepresentatives(subcontractor)
+	}
+
+	def addSeller(Seller seller) {
+		addToSalesRepresentatives(seller)
+	}
+
+	Coordinator getCoordinator() {
+		coordinator ?: parent?.getCoordinator()
+	}
+	
+	String toString() {
+		"$name";
+	}
+
 }

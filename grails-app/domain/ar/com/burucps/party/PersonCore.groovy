@@ -78,8 +78,4 @@ class PersonCore extends Person {
 			return list.join(' ');
 		return null;
 	}
-	
-	String toString() {
-		"$name";
-	}
 }

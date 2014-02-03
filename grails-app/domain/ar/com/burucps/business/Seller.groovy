@@ -1,12 +1,15 @@
 package ar.com.burucps.business
 
-class Seller extends EmployeeRole {
+import ar.com.burucps.sales.ISalesRepresentative;
+import ar.com.burucps.sales.Transaction;
+
+class Seller extends EmployeeRole implements ISalesRepresentative {
 
 	static final specification = "SELLER";
 
 	EmployeeCore employee
 	BusinessUnit businessUnit
-	//static hasMany = [transactions:Transaction]
+	static hasMany = [transactions:Transaction]
 	// Auiditoria
 	Date creationDate
 	String createdBy
@@ -21,7 +24,7 @@ class Seller extends EmployeeRole {
 		lastUpdateDate (nullable: true)
 		lastUpdateBy (nullable: true)
 	}
-	
+
 	def beforeInsert() {
 		//createdBy = securityService.currentAuthenticatedUsername()
 		//lastUpdatedBy = securityService.currentAuthenticatedUsername()
@@ -32,6 +35,10 @@ class Seller extends EmployeeRole {
 	def beforeUpdate() {
 		//lastUpdatedBy = securityService.currentAuthenticatedUsername()
 		lastUpdateDate = new Date()
+	}
+
+	Coordinator getCoordinator() {
+		businessUnit.getCoordinator()
 	}
 
 }

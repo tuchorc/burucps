@@ -58,8 +58,4 @@ class OrganizationCore extends Organization {
 		// TODO Auto-generated method stub
 		return null;
 	}	
-	
-	String toString() {
-		"$name";
-	}
 }
