@@ -8,5 +8,7 @@ abstract class Summary {
 	Integer month
 
     static constraints = {
+		month (blank: false, min: 1, max: 12)
+		quantity (blank: false, min: 0)
     }
 }
