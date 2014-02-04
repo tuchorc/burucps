@@ -1,5 +1,6 @@
 package ar.com.burucps.business
 
+import ar.com.burucps.business.create.EmployeeRoleTrader
 import ar.com.burucps.party.PersonCore
 
 class EmployeeCore extends Employee {
@@ -37,25 +38,40 @@ class EmployeeCore extends Employee {
 
 	@Override
 	public Employee addRole(String roleSpec) {
-		// TODO Auto-generated method stub
-		return null;
+		EmployeeRoleTrader employeeSingle = EmployeeRoleTrader.getInstance()
+		EmployeeRole newRole = employeeSingle.create(roleSpec)
+		if (newRole) {
+			newRole.employee = this
+			addToRoles(newRole)
+		}
+		return newRole
 	}
 
 	@Override
 	public Boolean hasRole(String roleSpec) {
-		// TODO Auto-generated method stub
-		return null;
+		roles.each {
+			if (it.specification == roleSpec)
+				return true
+		}
+		return false
 	}
 
 	@Override
 	public void removeRole(String roleSpec) {
-		// TODO Auto-generated method stub
-
+		roles.each {
+			if (it.specification == roleSpec) {
+				roles.remove(it)
+				return
+			}
+		}
 	}
 
 	@Override
 	public Employee getRole(String roleSpec) {
-		// TODO Auto-generated method stub
+		roles.each {
+			if (it.specification == roleSpec)
+				return it
+		}
 		return null;
 	}
 }

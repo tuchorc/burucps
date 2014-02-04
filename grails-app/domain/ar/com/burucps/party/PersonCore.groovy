@@ -1,5 +1,7 @@
 package ar.com.burucps.party
 
+import ar.com.burucps.party.create.PersonRoleTrader
+
 class PersonCore extends Person {
 	String uid;
 	String email;
@@ -42,27 +44,42 @@ class PersonCore extends Person {
 
 
 	@Override
-	public Person addRole(String roleSpec) {
-		// TODO Auto-generated method stub
-		return null;
+	Person addRole(String roleSpec) {
+		PersonRoleTrader personSingle = PersonRoleTrader.getInstance();
+		PersonRole newRole = personSingle.create(roleSpec);
+		if (newRole) {
+			newRole.person = this
+			addToRoles(newRole)
+		}
+		return newRole
 	}
 
 	@Override
-	public Boolean hasRole(String roleSpec) {
-		// TODO Auto-generated method stub
-		return null;
+	Boolean hasRole(String roleSpec) {
+		roles.each {
+			if (it.specification == roleSpec)
+				return true
+		}
+		return false
 	}
 
 	@Override
 	public void removeRole(String roleSpec) {
-		// TODO Auto-generated method stub
-
+		roles.each {
+			if (it.specification == roleSpec) {
+				roles.remove(it)
+				return
+			}
+		}
 	}
 
 	@Override
 	public Person getRole(String roleSpec) {
-		// TODO Auto-generated method stub
-		return null;
+		roles.each {
+			if (it.specification == roleSpec)
+				return it
+		}
+		return null
 	}
 
 	@Override

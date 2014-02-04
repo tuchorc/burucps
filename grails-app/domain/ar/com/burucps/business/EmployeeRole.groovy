@@ -6,7 +6,7 @@ abstract class EmployeeRole extends Employee {
 	static constraints = {
 		employee (nullable:false, blank:false)
 	}
-
+	
 	@Override
 	public Long getEmployeeNumber() {
 		employee.employeeNumber

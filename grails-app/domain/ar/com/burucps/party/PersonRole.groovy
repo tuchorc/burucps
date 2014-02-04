@@ -9,7 +9,7 @@ abstract class PersonRole extends Person {
 	static constraints = {
 		person (nullable:false, blank:false)
 	}
-
+	
 	@Override
 	public String getFirstName() {
 		return person.getFirstName();

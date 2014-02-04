@@ -1,5 +1,7 @@
 package ar.com.burucps.party
 
+import ar.com.burucps.party.create.OrganizationRoleTrader
+
 class OrganizationCore extends Organization {
 	String uid;
 	String name;
@@ -21,7 +23,7 @@ class OrganizationCore extends Organization {
 		lastUpdateDate (nullable: true);
 		lastUpdateBy (nullable: true);
 	}
-	
+
 	def beforeInsert() {
 		//createdBy = securityService.currentAuthenticatedUsername()
 		//lastUpdatedBy = securityService.currentAuthenticatedUsername()
@@ -36,26 +38,41 @@ class OrganizationCore extends Organization {
 
 
 	@Override
-	public Organization addRole(String roleSpec) {
-		// TODO Auto-generated method stub
-		return null;
+	Organization addRole(String roleSpec) {
+		OrganizationRoleTrader organizationSingle = OrganizationRoleTrader.getInstance()
+		OrganizationRole newRole = organizationSingle.create(roleSpec)
+		if (newRole) {
+			newRole.organization = this
+			addToRoles(newRole)
+		}
+		return newRole
 	}
 
 	@Override
-	public Boolean hasRole(String roleSpec) {
-		// TODO Auto-generated method stub
-		return null;
+	Boolean hasRole(String roleSpec) {
+		roles.each {
+			if (it.specification == roleSpec)
+				return true
+		}
+		return false
 	}
 
 	@Override
-	public void removeRole(String roleSpec) {
-		// TODO Auto-generated method stub
-		
+	void removeRole(String roleSpec) {
+		roles.each {
+			if (it.specification == roleSpec) {
+				roles.remove(it)
+				return
+			}
+		}
 	}
 
 	@Override
-	public Organization getRole(String roleSpec) {
-		// TODO Auto-generated method stub
-		return null;
-	}	
+	Organization getRole(String roleSpec) {
+		roles.each {
+			if (it.specification == roleSpec)
+				return it
+		}
+		return null
+	}
 }
