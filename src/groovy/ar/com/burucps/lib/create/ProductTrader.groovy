@@ -2,7 +2,7 @@ package ar.com.burucps.lib.create
 
 abstract class ProductTrader<Product,Specification> {
 
-	Map <Specification,ProductCreator<Product, Specification>> creators
+	Map <Specification,ProductCreator<Product, Specification>> creators = [:]
 
 	void addCreator(Specification specification, ProductCreator<Product, Specification> creator) {
 		if ( specification && creator )

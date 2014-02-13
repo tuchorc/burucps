@@ -8,7 +8,8 @@ class OrganizationRoleTrader extends ProductTrader<OrganizationRole, String> {
 
 	private static OrganizationRoleTrader INSTANCE = new OrganizationRoleTrader()
 
-	private OrganizationRoleTrader() {}
+	private OrganizationRoleTrader() {
+	}
 
 	static OrganizationRoleTrader getInstance() {
 		INSTANCE

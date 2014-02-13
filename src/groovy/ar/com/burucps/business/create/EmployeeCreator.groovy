@@ -5,6 +5,10 @@ import ar.com.burucps.lib.create.ProductCreator
 
 class EmployeeCreator extends ProductCreator<EmployeeCore,String> {
 
+	EmployeeCreator (String specification) {
+		super (specification)
+	}
+
 	@Override
 	EmployeeCore create() {
 		new EmployeeCore()
