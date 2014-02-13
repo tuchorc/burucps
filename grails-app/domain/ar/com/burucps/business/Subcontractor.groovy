@@ -10,7 +10,7 @@ class Subcontractor extends OrganizationRole implements ISalesRepresentative {
 
 	static final specification = "SUBCONTRACTOR";
 
-	OrganizationCore organization
+	//OrganizationCore organization
 	BusinessUnit businessUnit
 	static hasMany = [transactions:Transaction]
 	// Auiditoria

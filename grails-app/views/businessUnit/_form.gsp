@@ -23,7 +23,6 @@
 	class="fieldcontain ${hasErrors(bean: businessUnitInstance, field: 'parent', 'error')} ">
 	<label for="parent"> <g:message
 			code="businessUnit.parent.label" default="Parent" />
-
 	</label>
 	<g:select id="parent" name="parent.id"
 		from="${ar.com.burucps.business.BusinessUnit.list()}" optionKey="id"

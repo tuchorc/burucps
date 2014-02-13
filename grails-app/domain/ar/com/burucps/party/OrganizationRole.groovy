@@ -2,6 +2,7 @@ package ar.com.burucps.party
 
 abstract class OrganizationRole extends Organization {
 	static belongsTo = [organization : OrganizationCore]
+	OrganizationCore organization
 	
 	static constraints = {
 		organization (nullable: false, blank : false)
