@@ -1,22 +1,36 @@
 package ar.com.burucps.business
 
-import ar.com.burucps.sales.ISummarizable;
-import ar.com.burucps.settlement.ICommissionable;
+import java.util.Date;
+import java.util.Set;
 
-class Coordinator implements ISummarizable, ICommissionable {
-	// TODO: ver si minima unidad de coordinacion es pto de venta
-	//static hasMany = [groupsAssigend : Group, sellers:Seller]
-	static hasMany = [businessUnitsToCoordinate : BusinessUnit]
-	
-	static final SPECIFICATION = "COORDINATOR";
+public class Coordinator extends AbstractEmployeeRole {
 
-    static constraints = {
-    }
+	static final specification = "COORDINATOR";
 	
-	static mapping = { tablePerHierarchy false }
+	Set<BusinessUnit> businessUnitsToCoordinate;
+	// Auiditoria
+	Date creationDate;
+	String createdBy;
+	Date lastUpdateDate;
+	String lastUpdateBy;
+
+	static constraints = {
+		// Auditoria
+		creationDate (nullable: true)
+		createdBy (nullable: true)
+		lastUpdateDate (nullable: true)
+		lastUpdateBy (nullable: true)
+	}
 	
-	@Override
-	public String getSpecification() {
-		return SPECIFICATION;
+	def beforeInsert() {
+		//createdBy = securityService.currentAuthenticatedUsername();
+		//lastUpdatedBy = securityService.currentAuthenticatedUsername();
+		creationDate = new Date();
+		lastUpdateDate = new Date();
+	}
+
+	def beforeUpdate() {
+		//lastUpdatedBy = securityService.currentAuthenticatedUsername();
+		lastUpdateDate = new Date();
 	}
 }

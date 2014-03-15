@@ -1,36 +1,42 @@
 package ar.com.burucps.business
 
-import org.aspectj.bridge.ICommand;
+import ar.com.burucps.party.AbstractOrganization;
+import ar.com.burucps.party.OrganizationCore
+import ar.com.burucps.party.AbstractOrganizationRole
+import ar.com.burucps.sales.ISalesRepresentative;
+import ar.com.burucps.sales.SalesTransaction;
 
-import ar.com.burucps.party.OrganizationCore;
-import ar.com.burucps.party.OrganizationRole
-import ar.com.burucps.sales.ISalesRepresentative
-import ar.com.burucps.sales.ISummarizable;
-import ar.com.burucps.sales.Transaction;
-import ar.com.burucps.settlement.ICommissionable;
+public class Subcontractor extends AbstractOrganizationRole implements ISalesRepresentative {
 
+	static final specification = "SUBCONTRACTOR";
 
-class Subcontractor extends OrganizationRole implements ISummarizable, ISalesRepresentative, ICommissionable  {
-	
-	static final SPECIFICATION = "SUBCONTRACTER";
-	static hasMany = [transactions:Transaction]
-	static belongsTo = [core : OrganizationCore, businessUnit : BusinessUnit]
+	BusinessUnit businessUnit;
+	static hasMany = [transactions:SalesTransaction]
+	// Auiditoria
+	Date creationDate;
+	String createdBy;
+	Date lastUpdateDate;
+	String lastUpdateBy;
 
-    static constraints = {
-		core (nullable:false)
+	static constraints = {
 		businessUnit (nullable:false)
-    }
-	
-	def beforeInsert() {
-		this.uid = core.uid
-		this.name = core.name
-		this.email = core.email
+		// Auditoria
+		creationDate (nullable: true)
+		createdBy (nullable: true)
+		lastUpdateDate (nullable: true)
+		lastUpdateBy (nullable: true)
 	}
-	
-	static mapping = { tablePerHierarchy false }
 
-	@Override
-	public String getSpecification() {
-		return SPECIFICATION;
+	def beforeInsert() {
+		//createdBy = securityService.currentAuthenticatedUsername();
+		//lastUpdatedBy = securityService.currentAuthenticatedUsername();
+		creationDate = new Date();
+		lastUpdateDate = new Date();
 	}
+
+	def beforeUpdate() {
+		//lastUpdatedBy = securityService.currentAuthenticatedUsername();
+		lastUpdateDate = new Date();
+	}
+
 }

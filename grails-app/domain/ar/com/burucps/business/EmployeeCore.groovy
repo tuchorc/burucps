@@ -1,34 +1,84 @@
 package ar.com.burucps.business
 
-import java.util.List;
+import ar.com.burucps.business.create.EmployeeRoleTrader
+import ar.com.burucps.party.PersonCore
 
-class EmployeeCore  extends Employee {
-
-	static final SPECIFICATION = "EMPLOYEE";
-
-	String legajo;
-	static hasMany = [roles:EmployeeRole];
+public class EmployeeCore extends AbstractEmployee {
+	static final specification = "EMPLOYEE";
+	Long employeeNumber;
+	static hasMany = [roles:AbstractEmployeeRole];
+	// Auiditoria
+	Date creationDate;
+	String createdBy;
+	Date lastUpdateDate;
+	String lastUpdateBy;
 
 	static constraints = {
+		employeeNumber (unique:true, blank : false, nullable : false, min : 1L)
+		// Auditoria
+		creationDate (nullable: true);
+		createdBy (nullable: true);
+		lastUpdateDate (nullable: true);
+		lastUpdateBy (nullable: true);
+	}
+	
+	static mappedBy = [roles:'employee']
+
+	def beforeInsert() {
+		//createdBy = securityService.currentAuthenticatedUsername();
+		//lastUpdatedBy = securityService.currentAuthenticatedUsername();
+		creationDate = new Date();
+		lastUpdateDate = new Date();
 	}
 
-	static mapping = { tablePerHierarchy false }
+	def beforeUpdate() {
+		//lastUpdatedBy = securityService.currentAuthenticatedUsername();
+		lastUpdateDate = new Date();
+	}
+	
+	// Methods from AbstractEmployee
+	@Override
+	public Long getEmployeeEmployeeNumber() {
+		return employeeNumber;
+	}
+
 
 	@Override
-	public void addRole(String roleToAdd) {
+	public AbstractEmployee addRole(String roleSpec) {
 		EmployeeRoleTrader employeeSingle = EmployeeRoleTrader.getInstance();
-		EmployeeRole newRole = employeeSingle.create(roleToAdd);
-		newRole.employee = this;
-		roles.put(roleToAdd, newRole);
+		AbstractEmployeeRole newRole = employeeSingle.create(roleSpec);
+		if (newRole) {
+			newRole.employee = this;
+			addToRoles(newRole);
+		}
+		return newRole;
 	}
 
 	@Override
-	public Boolean hasRole(String roleToLook) {
-		return roles.containsKey(roleToLook);
+	public Boolean hasRole(String roleSpec) {
+		roles.each {
+			if (it.specification == roleSpec)
+				return true;
+		}
+		return false;
 	}
 
 	@Override
-	public String getSpecification() {
-		return SPECIFICATION;
+	public void removeRole(String roleSpec) {
+		roles.each {
+			if (it.specification == roleSpec) {
+				roles.remove(it);
+				return;
+			}
+		}
+	}
+
+	@Override
+	public AbstractEmployee getRole(String roleSpec) {
+		roles.each {
+			if (it.specification == roleSpec)
+				return it;
+		}
+		return null;
 	}
 }

@@ -1,11 +1,14 @@
 package ar.com.burucps.sales
 
-class Operation {
-	
-	String code
-	String meaning
-	String description
+public class Operation {
 
-    static constraints = {
-    }
+	String operationCode;
+	String meaning;
+	String description;
+
+	static constraints = {
+		operationCode (unique: true, blank: false)
+		meaning (blank: false)
+		description (nullable: true)
+	}
 }

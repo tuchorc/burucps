@@ -1,5 +1,9 @@
 package ar.com.burucps.sales;
 
-public interface ISalesRepresentative {
+import ar.com.burucps.business.BusinessUnit;
 
+public interface ISalesRepresentative {
+	public String getPartyName();
+
+	public BusinessUnit getBusinessUnit();
 }

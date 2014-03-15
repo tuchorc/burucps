@@ -1,56 +1,92 @@
 package ar.com.burucps.party
 
-import java.util.Map;
+import ar.com.burucps.party.create.OrganizationRoleTrader
 
-import ar.com.burucps.business.EmployeeRole;
-
-class OrganizationCore extends Organization {
-
-	static hasMany = [roles:OrganizationRole];
+public class OrganizationCore extends AbstractOrganization {
+	String organizationId;
+	String organizationName;
+	String email;
+	static hasMany = [roles:AbstractOrganizationRole];
+	// Auiditoria
+	Date creationDate;
+	String createdBy;
+	Date lastUpdateDate;
+	String lastUpdateBy;
 
 	static constraints = {
+		organizationId (nullable: true)
+		organizationName (nullable: false)
+		email (email : true, nullable: true)
+		// Auditoria
+		creationDate (nullable: true)
+		createdBy (nullable: true)
+		lastUpdateDate (nullable: true)
+		lastUpdateBy (nullable: true)
 	}
-	
-	static mapping = { tablePerHierarchy false }
-	
+
 	def beforeInsert() {
-		//createdBy = securityService.currentAuthenticatedUsername()
-		//lastUpdatedBy = securityService.currentAuthenticatedUsername()
+		//createdBy = securityService.currentAuthenticatedUsername();
+		//lastUpdatedBy = securityService.currentAuthenticatedUsername();
 		creationDate = new Date();
 		lastUpdateDate = new Date();
-	 }
-	
+	}
+
 	def beforeUpdate() {
-		//lastUpdatedBy = securityService.currentAuthenticatedUsername()
+		//lastUpdatedBy = securityService.currentAuthenticatedUsername();
 		lastUpdateDate = new Date();
-	 }
-	
-	def afterUpdate() {
-		roles.each {
-			it.uid = this.uid
-			it.name = this.name
-			it.email = this.email
-			it.save()
-		}
 	}
 	
 	@Override
-	public void addRole(String roleToAdd) {
-		OrganizationRoleTrader organizationSingle = OrganizationRoleTrader.getInstance();
-		OrganizationRole newRole = organizationSingle.create(roleToAdd);
-		this.addToRoles(newRole);
+	public String getPartyName() {
+		return organizationName;
 	}
 
 	@Override
-	public Boolean hasRole(String roleToLook) {
+	public String getPartyUid() {
+		return organizationId;
+	}
+
+	@Override
+	public String getPartyEmail() {
+		return email;
+	}
+
+	@Override
+	public AbstractOrganization addRole(String roleSpec) {
+		OrganizationRoleTrader organizationSingle = OrganizationRoleTrader.getInstance();
+		AbstractOrganizationRole newRole = organizationSingle.create(roleSpec);
+		if (newRole) {
+			newRole.organization = this;
+			addToRoles(newRole);
+		}
+		return newRole;
+	}
+
+	@Override
+	public Boolean hasRole(String roleSpec) {
 		roles.each {
-			if (it.specification == roleToLook)
+			if (it.specification == roleSpec)
 				return true;
 		}
 		return false;
 	}
-	
-	String toString() {
-		"$name";
+
+	@Override
+	public void removeRole(String roleSpec) {
+		roles.each {
+			if (it.specification == roleSpec) {
+				roles.remove(it);
+				return;
+			}
+		}
+	}
+
+	@Override
+	public AbstractOrganization getRole(String roleSpec) {
+		roles.each {
+			if (it.specification == roleSpec)
+				return it;
+		}
+		return null;
 	}
 }

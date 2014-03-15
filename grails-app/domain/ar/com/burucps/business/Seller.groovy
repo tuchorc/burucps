@@ -1,25 +1,43 @@
 package ar.com.burucps.business
 
 import ar.com.burucps.sales.ISalesRepresentative;
-import ar.com.burucps.sales.ISummarizable
-import ar.com.burucps.sales.Transaction;
-import ar.com.burucps.settlement.ICommissionable;
+import ar.com.burucps.sales.SalesTransaction;
 
-class Seller implements ISummarizable, ISalesRepresentative, ICommissionable {
+public class Seller extends AbstractEmployeeRole implements ISalesRepresentative {
 
-	static final SPECIFICATION = "SELLER";
-	// TODO: ver si hace falta referenciar al coordinador.
-	//static belongsTo = [group : Group, coordinator : Coordinator]
-	static belongsTo = [businessUnit : BusinessUnit]
-	static hasMany = [transactions:Transaction]
+	static final specification = "SELLER";
 
-	static mapping = { tablePerHierarchy false }
+	BusinessUnit businessUnit;
+	static hasMany = [transactions:SalesTransaction]
+	// Auiditoria
+	Date creationDate;
+	String createdBy;
+	Date lastUpdateDate;
+	String lastUpdateBy;
 
 	static constraints = {
+		businessUnit(nullable:false, blank:false)
+		// Auditoria
+		creationDate (nullable: true)
+		createdBy (nullable: true)
+		lastUpdateDate (nullable: true)
+		lastUpdateBy (nullable: true)
 	}
 
-	@Override
-	public String getSpecification() {
-		return SPECIFICATION;
+	def beforeInsert() {
+		//createdBy = securityService.currentAuthenticatedUsername();
+		//lastUpdatedBy = securityService.currentAuthenticatedUsername();
+		creationDate = new Date();
+		lastUpdateDate = new Date();
 	}
+
+	def beforeUpdate() {
+		//lastUpdatedBy = securityService.currentAuthenticatedUsername();
+		lastUpdateDate = new Date();
+	}
+
+	public Coordinator getCoordinator() {
+		businessUnit.getCoordinator();
+	}
+
 }
