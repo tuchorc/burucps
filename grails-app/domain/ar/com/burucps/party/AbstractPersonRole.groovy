@@ -13,53 +13,53 @@ public class AbstractPersonRole extends AbstractPerson {
 	// Methods from AbstractParty
 	@Override
 	public String getPartyName() {
-		return person.getPartyName();
+		return person?.getPartyName();
 	}
 
 	@Override
 	public String getPartyUid() {
-		return person.getPartyUid();
+		return person?.getPartyUid();
 	}
 
 	@Override
 	public String getPartyEmail() {
-		return person.getPartyEmail();
+		return person?.getPartyEmail();
 	}
 	
 	// Methods from AbstractPerson
 	@Override
 	public String getPersonFirstName() {
-		return person.getPersonFirstName();
+		return person?.getPersonFirstName();
 	}
 
 	@Override
 	public String getPersonMiddleNames() {
-		return person.getPersonMiddleNames();
+		return person?.getPersonMiddleNames();
 	}
 
 	@Override
 	public String getPersonSurname() {
-		return person.getPersonSurname();
+		return person?.getPersonSurname();
 	}
 
 	@Override
 	public Date getPersonDateOfBirth() {
-		return person.getPersonDateOfBirth();
+		return person?.getPersonDateOfBirth();
 	}
 
 	@Override
 	public AbstractPerson addRole(String roleSpec) {
-		return person.addRole(roleSpec);
+		return person?.addRole(roleSpec);
 	}
 
 	@Override
 	public Boolean hasRole(String roleSpec) {
-		return person.hasRole(roleSpec);
+		return person?.hasRole(roleSpec);
 	}
 
 	@Override
 	public void removeRole(String roleSpec) {
-		person.removeRole(roleSpec);
+		person?.removeRole(roleSpec);
 	}
 
 	@Override
