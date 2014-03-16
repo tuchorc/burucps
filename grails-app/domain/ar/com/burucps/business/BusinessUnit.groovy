@@ -19,7 +19,7 @@ public class BusinessUnit {
 		unitCode (unique: true, blank: false, nullable: false)
 		unitName (unique: true, blank: false, nullable: false)
 		parent (nullable: true)
-		//coordinator (blank: false, nullable: true)
+		coordinator (nullable: true)
 		// Auditoria
 		creationDate (nullable: true)
 		createdBy (nullable: true)
@@ -50,9 +50,38 @@ public class BusinessUnit {
 	public Coordinator getCoordinator() {
 		return coordinator ?: parent?.getCoordinator();
 	}
-	
+
+	/*
+	 * If you override the equals(), you MUST also override hashCode().
+	 * Otherwise a violation of the general contract for Object.hashCode will
+	 * occur, which can have unexpected repercussions when your class is in
+	 * conjunction with all hash-based collections.
+	 */
+	@Override
+	public int hashCode() {
+		return this.id.intValue();
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (!o)
+			return false;
+		if (!o instanceof BusinessUnit)
+			return false;
+		if (!this.id)
+			return false;
+		return this.id.equals(((BusinessUnit) o).getId());
+	}
+
+	@Override
 	public String toString() {
 		return "$unitName";
+	}
+
+	public List<BusinessUnit> listAllButThis() {
+		List<BusinessUnit> list = BusinessUnit.list();
+		list.remove(this);
+		return list;
 	}
 
 }
