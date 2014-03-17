@@ -1,5 +1,7 @@
 package ar.com.burucps.business
 
+import grails.orm.HibernateCriteriaBuilder;
+
 import ar.com.burucps.party.AbstractParty
 
 public class BusinessUnit {
@@ -76,6 +78,19 @@ public class BusinessUnit {
 	@Override
 	public String toString() {
 		return "$unitName";
+	}
+
+	public static List<BusinessUnit> listGeographicalZones() {
+		List<BusinessUnit> rootList = BusinessUnit.listRoots();
+		HibernateCriteriaBuilder criteriaQuery = BusinessUnit.createCriteria();
+		List<BusinessUnit> zonesList = criteriaQuery.list { inList('parent',rootList) }
+		return zonesList;
+	}
+
+	public static List<BusinessUnit> listRoots() {
+		HibernateCriteriaBuilder criteriaQuery = BusinessUnit.createCriteria();
+		List<BusinessUnit> list = criteriaQuery.list { isNull('parent') }
+		return list;
 	}
 
 	public List<BusinessUnit> listAllButThis() {
